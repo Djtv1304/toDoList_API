@@ -6,7 +6,7 @@ export async function GET() {
     const tasks = await prisma.task.findMany();
     return new Response(JSON.stringify(tasks), { status: 200 });
   } catch (error) {
-    return new Response(JSON.stringify({ error: 'Error fetching tasks' }), { status: 500 });
+    return new Response(JSON.stringify({ error: error.message }), { status: 500 });
   }
 }
 
