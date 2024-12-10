@@ -31,4 +31,4 @@ jobs:
       - name: Deploy to Vercel
         env: # Solo necesitas agregar variables adicionales aquí si no están en la sección global
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-        run: npx vercel deploy --prod --yes --token=$VERCEL_TOKEN --debug
+        run: npx vercel deploy --prod --yes --token=$VERCEL_TOKEN
