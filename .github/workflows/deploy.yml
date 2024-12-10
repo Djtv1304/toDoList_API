@@ -8,6 +8,8 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    env: # Variables de entorno disponibles para todos los pasos
+      DATABASE_URL: ${{ secrets.DATABASE_URL }}
 
     steps:
       - name: Checkout code
@@ -19,18 +21,14 @@ jobs:
           node-version: 18
 
       - name: Install dependencies
-        env: # Pasamos la variable de entorno
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
         run: npm install
 
       - name: Generate Prisma client and run migrations
-        #env: # Pasamos la variable de entorno
-        #  DATABASE_URL: ${{ secrets.DATABASE_URL }}
         run: |
           npx prisma generate
           npx prisma migrate deploy
 
       - name: Deploy to Vercel
-        env:
+        env: # Solo necesitas agregar variables adicionales aquí si no están en la sección global
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
         run: npx vercel --prod
