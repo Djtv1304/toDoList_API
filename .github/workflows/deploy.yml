@@ -3,26 +3,30 @@ name: Deploy to Vercel
 on:
   push:
     branches:
-      - master
+      - master # Cambia según tu rama principal
 
 jobs:
-  build_and_deploy:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Install Node.js
+      - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '18'
+          node-version: 18
 
       - name: Install dependencies
         run: npm install
 
-      - name: Run build
-        run: npm run build
+      - name: Generate Prisma client and run migrations
+        env: # Pasamos la variable de entorno
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: |
+          npx prisma generate
+          npx prisma migrate deploy
 
       - name: Deploy to Vercel
         env:
