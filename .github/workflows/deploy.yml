@@ -8,7 +8,7 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    env: # Variables de entorno disponibles para todos los pasos
+    env: # Variables de entorno disponibles para todos los pasos del trabajo
       DATABASE_URL: ${{ secrets.DATABASE_URL }}
 
     steps:
