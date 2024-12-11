@@ -51,7 +51,7 @@ Además, necesitarás:
 ### Clonar el Repositorio
 
 ```bash
-git clone https://github.com/tu-usuario/toDoList_API.git
+git clone https://github.com/Djtv1304/toDoList_API.git
 cd toDoList_API
 ```
 
